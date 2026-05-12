@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investidor Inteligente — Relatório de Usabilidade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #070b1a;
+      --card: rgba(20, 28, 56, 0.78);
+      --border: rgba(130, 154, 255, 0.25);
+      --txt: #eef3ff;
+      --muted: #a9b5e2;
+      --accent: #7c9cff;
+      --accent-2: #2de2e6;
+      --ok: #57f287;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--txt);
+      background: radial-gradient(circle at 10% 10%, #243a7f 0, #111734 28%, #070b1a 60%), var(--bg);
+      min-height: 100vh;
+    }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 32px 20px 64px; }
+    .hero {
+      background: linear-gradient(135deg, rgba(124,156,255,.25), rgba(45,226,230,.16));
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+    }
+    h1 { margin: 0 0 12px; font-size: clamp(1.8rem, 4vw, 2.9rem); }
+    p { margin: 8px 0; line-height: 1.55; color: var(--muted); }
+    .grid { display: grid; gap: 18px; margin-top: 20px; }
+    .stats { grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .metric { font-size: 1.95rem; font-weight: 800; margin-top: 8px; }
+    .label { color: var(--muted); font-size: .9rem; }
+    .section-title { margin: 28px 0 12px; font-size: 1.25rem; font-weight: 700; }
+    .charts { grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
+    canvas { width: 100% !important; height: 280px !important; }
+    .quote-list { display: grid; gap: 12px; }
+    .quote {
+      background: rgba(13, 18, 39, .8);
+      border-left: 3px solid var(--accent-2);
+      border-radius: 10px;
+      padding: 14px;
+      color: #d8e0ff;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Investidor Inteligente — Resultado do Formulário de Usabilidade</h1>
+      <p>Relatório consolidado com <strong>36 respostas</strong> do teste acadêmico (TCC). Os dados abaixo foram mantidos exatamente conforme a coleta original.</p>
+      <div class="grid stats">
+        <div class="card"><div class="label">Consentimento</div><div class="metric" style="color:var(--ok)">100%</div><div class="label">Sim, concordo (36/36)</div></div>
+        <div class="card"><div class="label">Concluíram todas as etapas</div><div class="metric">100%</div><div class="label">Acesso + Ativos + Carteira</div></div>
+        <div class="card"><div class="label">Maior faixa etária</div><div class="metric">25–34</div><div class="label">19 participantes (52,8%)</div></div>
+        <div class="card"><div class="label">Perfil de experiência</div><div class="metric">Iniciante</div><div class="label">28 participantes (77,8%)</div></div>
+      </div>
+    </section>
+
+    <h2 class="section-title">Perfil dos participantes</h2>
+    <section class="grid charts">
+      <div class="card"><canvas id="idade"></canvas></div>
+      <div class="card"><canvas id="escolaridade"></canvas></div>
+      <div class="card"><canvas id="renda"></canvas></div>
+      <div class="card"><canvas id="experiencia"></canvas></div>
+      <div class="card"><canvas id="investe"></canvas></div>
+      <div class="card"><canvas id="entendimento"></canvas></div>
+    </section>
+
+    <h2 class="section-title">Avaliação da experiência (escala 1–5)</h2>
+    <section class="grid charts">
+      <div class="card"><canvas id="facilidade"></canvas></div>
+      <div class="card"><canvas id="navegacao"></canvas></div>
+      <div class="card"><canvas id="acessivel"></canvas></div>
+      <div class="card"><canvas id="clareza"></canvas></div>
+      <div class="card"><canvas id="fundamentos"></canvas></div>
+      <div class="card"><canvas id="critico"></canvas></div>
+      <div class="card"><canvas id="reflexao"></canvas></div>
+      <div class="card"><canvas id="motivacao"></canvas></div>
+      <div class="card"><canvas id="importancia"></canvas></div>
+      <div class="card"><canvas id="futuro"></canvas></div>
+    </section>
+
+    <h2 class="section-title">Resumo qualitativo (feedback aberto)</h2>
+    <section class="card quote-list">
+      <div class="quote">“Plataforma intuitiva, fácil de usar e muito útil para quem está começando.”</div>
+      <div class="quote">“A IA ajuda bastante, mas seria ótimo manter memória/contexto entre páginas.”</div>
+      <div class="quote">“Sugestão recorrente: tornar os ativos mais amigáveis para leigos (menos siglas isoladas).”</div>
+      <div class="quote">“Percepção geral muito positiva: didática, prática e com alto potencial para iniciantes.”</div>
+    </section>
+  </div>
+
+<script>
+const palette = ['#7c9cff','#2de2e6','#8bf5ba','#ffc857','#ff8fab','#cdb4ff'];
+
+function doughnut(id, labels, data, title){
+  new Chart(document.getElementById(id),{
+    type:'doughnut',
+    data:{labels,datasets:[{data,backgroundColor:palette,borderWidth:0}]},
+    options:{plugins:{legend:{labels:{color:'#dbe5ff'}},title:{display:true,text:title,color:'#fff'}}}
+  })
+}
+function bars(id, labels, data, title){
+  new Chart(document.getElementById(id),{
+    type:'bar',
+    data:{labels,datasets:[{label:'Respostas',data,backgroundColor:'#7c9cff',borderRadius:8}]},
+    options:{scales:{x:{ticks:{color:'#dbe5ff'}},y:{ticks:{color:'#dbe5ff'},beginAtZero:true}},plugins:{legend:{display:false},title:{display:true,text:title,color:'#fff'}}}
+  })
+}
+
+// Perfil
+bars('idade',['18-24','25-34','35-44','45+'],[12,19,2,3],'Faixa etária');
+bars('escolaridade',['Médio','Técnico','Sup. Incomp.','Sup. Comp.','Pós'],[2,0,16,14,4],'Escolaridade');
+bars('renda',['Até 1k','1.001-3k','3.001-5k','Acima 5k'],[5,9,8,14],'Faixa de renda mensal');
+doughnut('experiencia',['Iniciante','Intermediário','Avançado'],[28,5,3],'Nível de experiência');
+doughnut('investe',['Sim','Não'],[14,22],'Já investe no mercado financeiro?');
+bars('entendimento',['Muito pouco','Pouco','Médio','Alto','Muito alto'],[13,12,7,3,1],'Entendimento prévio');
+
+// Avaliação
+bars('facilidade',['1','2','3','4','5'],[0,0,2,3,31],'Plataforma fácil de usar');
+bars('navegacao',['1','2','3','4','5'],[0,0,0,3,33],'Navegação intuitiva');
+bars('acessivel',['1','2','3','4','5'],[0,0,2,1,33],'Informações acessíveis');
+bars('clareza',['1','2','3','4','5'],[0,0,1,13,22],'IA clara e compreensível');
+bars('fundamentos',['1','2','3','4','5'],[0,0,0,10,26],'IA ajudou com fundamentos e indicadores');
+bars('critico',['1','2','3','4','5'],[0,0,4,10,22],'IA aumentou senso crítico');
+bars('reflexao',['1','2','3','4','5'],[0,1,3,7,25],'IA ajudou a refletir antes de decidir');
+bars('motivacao',['1','2','3','4','5'],[0,0,4,7,25],'Motivação para investir/aprofundar');
+bars('importancia',['1','2','3','4','5'],[0,0,2,8,26],'Importância de aprender investimentos');
+bars('futuro',['1','2','3','4','5'],[0,1,3,5,27],'Usaria a plataforma no futuro');
+</script>
+</body>
+</html>
